@@ -22,4 +22,24 @@ jobs:
       - name: Zip folder
         run: |
           cd ../
-          ls
+          rm -rf BeachboyCustomRoleplayPack.zip
+          zip -r BeachboyCustomRoleplayPack.zip ./BeachboyCustomRoleplayPack/*
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          tag_name: ${{ github.run_number }}
+          release_name: ${{ github.run_number }}
+
+      - name: Upload zip to release
+        uses: actions/create-release@v1
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./BeachboyCustomRoleplayPack.zip
+          asset_name: BeachboyCustomRoleplayPack.zip
+          asset_content_type: application/zip
