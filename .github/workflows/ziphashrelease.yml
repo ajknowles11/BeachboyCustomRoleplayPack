@@ -25,6 +25,7 @@ jobs:
           cd ../
           rm -rf BeachboyCustomRoleplayPack.zip
           zip -r BeachboyCustomRoleplayPack.zip ./BeachboyCustomRoleplayPack/*
+          ls
 
       - name: Create release
         id: create_release
