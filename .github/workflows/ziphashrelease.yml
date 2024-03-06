@@ -36,11 +36,10 @@ jobs:
           release_name: ${{ github.run_number }}
 
       - name: Upload zip to release
-        uses: actions/create-release@v1
+        uses: actions/upload-release-asset@v1
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with: 
-          tag_name: ${{ github.run_number }}
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./BeachboyCustomRoleplayPack.zip
           asset_name: BeachboyCustomRoleplayPack.zip
