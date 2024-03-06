@@ -22,9 +22,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Zip folder
         run: |
-          cd ../
-          rm -rf ${{ github.event.repository.name }}.zip
-          zip -r ${{ github.event.repository.name }}.zip ./${{ github.event.repository.name }}/*
+          rm -rf ../${{ github.event.repository.name }}.zip
+          zip -r ../${{ github.event.repository.name }}.zip ./*
 
       - name: Create release
         id: create_release
