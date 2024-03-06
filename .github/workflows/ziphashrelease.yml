@@ -46,13 +46,15 @@ jobs:
 
       - name: Update hash on server
         run: | 
-          ftp -in ${{ secrets.SERVER_IP }}
+          ftp -in ${{ secrets.SERVER_IP }} <<EOF
           user "${{ secrets.SERVER_USER }}" "${{ secrets.SERVER_PASSWORD }}"
           get server.properties ../server.properties
           quit
+          EOF
           python3 sethash.py ../server.properties `sha1sum ../${{ github.event.repository.name }}.zip | cut -d " " -f 1`
-          ftp -in ${{ secrets.SERVER_IP }}
+          ftp -in ${{ secrets.SERVER_IP }} <<EOF
           user "${{ secrets.SERVER_USER }}" "${{ secrets.SERVER_PASSWORD }}"
           put ../server.properties server.properties
           quit
+          EOF
           
